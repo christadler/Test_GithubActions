@@ -35,8 +35,8 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-      #- name: install dependencies
-        #run: python -m pip install --upgrade pip -r requirements.txt
+      - name: install dependencies
+        run: python -m pip install --upgrade pip -r requirements.txt
         
       - name: Update analysis notebook
         run: |
