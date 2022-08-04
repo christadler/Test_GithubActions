@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: nbconvert
+name: jupytext2ipynb
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  #push:
-  #branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -25,23 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Starting the conversion workflow...
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          
       - name: install dependencies
-        run: python -m pip install --upgrade pip -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip -r requirements.txt
+          python -m pip install jupyter nbconvert nbformat
         
       - name: Update analysis notebook
         run: |
-          python -m pip install jupyter nbconvert nbformat
-          jupyter nbconvert --to notebook --execute notebooks/Python_Crash_Course_solution.ipynb --ExecutePreprocessor.kernel_name='python3' --output ../notebook_executed
+          jupyter nbconvert --to notebook --execute notebooks/Python_Crash_Course_solution.ipynb --ExecutePreprocessor.kernel_name='python3' --output ../notebooks_executed/{{ filename }}_solution.ipynbtational Seismology/Wave Propagation & Analytical Solutions/time_reversal_reciprocity.py
           
       - name: commit updated notebook
         uses: EndBug/add-and-commit@v7
@@ -49,3 +40,12 @@ jobs:
           author_name: Plot update bot
           message: "Update Notebook"
           add: "notebook_executed.ipynb"
+
+      # This part will only try to build the docker image
+      # It will not push it to hub.docker.com
+      # There is another basic actions that helps with publishing
+      # https://github.com/actions/starter-workflows/blob/main/ci/docker-publish.yml     
+      #- name: Build the Docker image
+      # run: docker build . --file Dockerfile --tag christadler/seismo-live:$(date +%s)
+
+
