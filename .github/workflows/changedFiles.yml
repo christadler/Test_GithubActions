@@ -32,7 +32,7 @@ jobs:
             echo "$path1 or $path2 is the path"
             filename=$(basename -- "$fullfile")
             filename2="${filename%.*}"
-        echo "Filename1:  $filename , Filename2: $filename2 
+        echo "Filename1:  $filename , Filename2: $filename2 "
             if [[ $file == "notebooks/**/*.ipynb" ]]
             then
               echo "$file is an ipynb file"
