@@ -27,6 +27,13 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
+            path1= dirname -- "$file"
+            path2= ${file%/*}
+            echo "$path1 or $path2 is the path"
+            filename=$(basename -- "$fullfile")
+            extension="${filename##*.}"
+            filename="${filename%.*}"
+        echo "Filename:  $filename , Extension: $extension 
             if [[ $file == "notebooks/**/*.ipynb" ]]
             then
               echo "$file is an ipynb file"
