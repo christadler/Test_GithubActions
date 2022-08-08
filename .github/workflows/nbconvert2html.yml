@@ -32,7 +32,9 @@ jobs:
         
       - name: create html pages
         run: |
-          jupyter nbconvert --to html --execute notebooks/Python\ Introduction/* --ExecutePreprocessor.kernel_name='python3' --output-dir ../html/
+          jupyter kernelspec list
+          jupyter nbconvert --to html --execute notebooks/Python\ Introduction/* --output-dir ../html/
+          #jupyter nbconvert --to html --execute notebooks/Python\ Introduction/* --ExecutePreprocessor.kernel_name='python3' --output-dir ../html/
           
       - name: commit updated notebook
         uses: EndBug/add-and-commit@v7
