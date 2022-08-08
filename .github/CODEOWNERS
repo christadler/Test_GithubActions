@@ -1,0 +1,20 @@
+
+# These owners will be the default owners for everything in 
+# the repo. Unless a later match takes precedence,
+#               @christadler and @megies 
+# will be requested for review when someone opens a pull request
+
+# Everything in the main directory and all github specific things are mine
+#.        @christadler @megies
+.        @christadler
+
+# Assign subdirectories to the people that created the notebooks
+
+#InputNotebooks/Computational\ Seismology         @heinerigel
+#InputNotebooks/Instaseis-Syngine                 @krischer
+#InputNotebooks/Obspy                             @megies
+#InputNotebooks/Python\ Introduction              @megies
+
+# For testing, everything belongs to me
+InputNotebooks/Computational\ Seismology         @christadler
+InputNotebooks/Python\ Introduction              @christadler
