@@ -36,11 +36,13 @@ jobs:
       - name: create html pages
         run: |
           jupyter kernelspec list
-          jupyter nbconvert --to html --execute notebooks/**/*.ipynb --output-dir ../html/
-          #jupyter nbconvert --to html --execute notebooks/Python\ Introduction/* --ExecutePreprocessor.kernel_name='python3' --output-dir ../html/
+          jupyter nbconvert --to html --execute notebooks/**/*.ipynb --ExecutePreprocessor.kernel_name='python3' --output-dir html/
+          pwd
+          ls -al html/
           
       - name: commit updated notebook
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
-          author_name: nbconvert2html-Action
-          message: "Added html files"
+          message: Show GitHub Actions logo
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
