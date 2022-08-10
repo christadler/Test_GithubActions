@@ -38,6 +38,7 @@ jobs:
       - name: List all changed files
         run: |
           IFS=";"
+          echo "${{ steps.changed-files.outputs.all_changed_files }}"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
             if [[ $file == *.ipynb ]]
