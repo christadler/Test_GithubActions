@@ -1,4 +1,4 @@
-name: changed files
+name: adaptIpynbFiles
 
 on:
   push:
