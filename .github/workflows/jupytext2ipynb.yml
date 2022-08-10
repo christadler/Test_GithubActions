@@ -6,9 +6,9 @@
 name: (nip) jupytext2ipynb
 
 on:
-  push:
-    paths:
-      - 'InputNotebooks/**/*'
+  #push:
+  paths:
+    - 'InputNotebooks/**/*'
   pull_request:
     branches: 
       - 'main'
