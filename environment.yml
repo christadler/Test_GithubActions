@@ -1,0 +1,10 @@
+name: seismo-live environment
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - obspy
+  - cartopy
+  - cartopy_offlinedata

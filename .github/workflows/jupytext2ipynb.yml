@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  strip:
+  convertJupytext2Notebook:
     runs-on: ubuntu-latest
 
     steps:
