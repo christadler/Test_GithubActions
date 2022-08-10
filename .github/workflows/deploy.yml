@@ -9,20 +9,17 @@ on:
 
 jobs:
 
-  buildDockerimage:
-
+  docker:
     runs-on: ubuntu-latest
-
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+        name: Check out code
 
-      - name: create html pages
-        run: |
-          jupyter kernelspec list
-          jupyter nbconvert --to html --execute notebooks/**/*.ipynb --ExecutePreprocessor.kernel_name='python3' --output-dir html/
-          pwd
-          ls -al html/
-          
-  uploadDockerimage:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build & push Docker image
+        with:
+          image: christadler/seismo-live
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
