@@ -2,8 +2,9 @@ name: adaptIpynbFiles
 
 on:
   push:
-   branches:
-     - 'main'
+    # Notebook files could only come in through notebooks* or InputNotebooks*
+    #branches:
+    #- 'main'
    paths:
      - 'notebooks/**/*'
      - 'InputNotebooks/**/*'
@@ -31,6 +32,8 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v24.1
+        with:
+          separator: ";"
 
       - name: List all changed files
         run: |
