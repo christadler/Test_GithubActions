@@ -43,12 +43,12 @@ jobs:
             then
               # clear output on all .ipynb files for diff'ing 
               echo "$file is an ipynb file"
-              jupyter nbconvert --to notebook --ClearOutputPreprocessor.enabled=True $file
+              jupyter nbconvert --to notebook --ClearOutputPreprocessor.enabled=True --inplace $file
               if [[ $file == *solution.ipynb ]]
               then    
                 # execute solutions files inplace
                 echo "$file is an solution file"
-                jupyter nbconvert --to notebook --execute -inplace $file
+                jupyter nbconvert --to notebook --execute --inplace $file
               fi
             else
               echo "$file is not an ipynb file"
