@@ -1,9 +1,16 @@
-# This is a basic workflow to help you get started with Actions
+# This workflow will build a new docker image 
+# and upload it to christadler/seismo-live
+# It will only run if a release is made or
+# if the workflow is dipatched by hand
+#
+# Author: Iris Christadler
+# Last modified: 2022-08-10
 
 name: deploy
 
-# Controls when the workflow will run
 on:
+  release:
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

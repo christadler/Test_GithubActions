@@ -14,7 +14,7 @@ RUN conda install nbgitpuller --yes
 
 
 ADD notebooks /home/jovyan/
-#RUN rm -rf /home/jovyan/work
+RUN rm -rf /home/jovyan/work
 
 USER root
 RUN chown -R jovyan:users /home/jovyan

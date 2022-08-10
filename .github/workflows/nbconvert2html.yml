@@ -1,16 +1,21 @@
-# This is a basic workflow to help you get started with Actions
+# This github action workflow will convert all notebooks found in /notebooks
+# to the html directory
+# 
+# Author: Iris Christadler
+# Latest Update: 2022-08-10
+name: (wip) Convert_2_HTML
 
-name: nbconvert2html
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - 'main'
-    paths:
-      - '/notebooks/**/*'
-        
+    #branches:
+    # - 'main'
+    # Notebooks will only come in through /notebooks but it might make
+    # more sense to issue this only by hand or on release
+    #paths:
+    #- '/notebooks/**/*'
+
+  release:      
+  
   pull_request:
     branches: [ "main" ]
 
@@ -36,9 +41,9 @@ jobs:
       - name: create html pages
         run: |
           jupyter kernelspec list
+          echo "Converting all notebooks to HTML"
           jupyter nbconvert --to html --execute notebooks/**/*.ipynb --ExecutePreprocessor.kernel_name='python3' --output-dir html/
-          pwd
-          ls -al html/
+          ls -al html/*
           
       - name: commit updated notebook
         uses: EndBug/add-and-commit@v9

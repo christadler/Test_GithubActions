@@ -1,3 +1,11 @@
+# This action looks at all changed files from the notebooks/ and InputNotebooks/-Dir
+# If they are ipynb files, it will first clear all output files to allow diff'ing
+# After that all *solution.ipynb files will be run and outputs will be saved
+# To ensure that no files are lost, another comit is down in the last step
+# This commit can be the reason for a MERGE being necessary.
+# 
+# Author: Iris Christadler
+# Last changed: 2022-08-10
 name: adaptIpynbFiles
 
 on:
@@ -5,12 +13,12 @@ on:
     # Notebook files could only come in through notebooks* or InputNotebooks*
     #branches:
     #- 'main'
-   paths:
+  paths:
      - 'notebooks/**/*'
      - 'InputNotebooks/**/*'
   pull_request:
     branches:
-      - main
+      - 'main'
     # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
