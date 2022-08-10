@@ -1,0 +1,32 @@
+FROM jupyter/minimal-notebook:57ebe55c07d0
+
+MAINTAINER Iris Christadler <christadler@geophysik.uni-muenchen.de
+
+# Jupyterhub 2.3.1 is already installed
+#ARG JUPYTERHUB_VERSION=2.3.1
+#RUN pip3 install --no-cache jupyterhub==$JUPYTERHUB_VERSION
+
+RUN conda install --yes 'obspy=1.3.0'
+RUN conda install cartopy --yes
+RUN conda install cartopy_offlinedata --yes
+RUN conda install nbgitpuller --yes
+#RUN conda install instaseis --yes
+
+
+ADD notebooks /home/jovyan/
+#RUN rm -rf /home/jovyan/work
+
+USER root
+RUN chown -R jovyan:users /home/jovyan
+USER jovyan
+
+# Set a default backend for matplotlib!
+RUN mkdir -p ~/.config/matplotlib && touch ~/.config/matplotlib/matplotlibrc && printf "\nbackend: nbagg\n" >> ~/.config/matplotlib/matplotlibrc
+
+# Build the font cache so its already done in the notebooks.
+RUN python -c "from matplotlib.font_manager import FontManager; FontManager()"
+
+
+
+# Ignore all Pythonwarnings to hide them from the user
+#ENV PYTHONWARNINGS ignore
