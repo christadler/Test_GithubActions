@@ -6,7 +6,7 @@
 name: (wip) Convert_2_HTML
 
 on:
-  push:
+  #push:
     #branches:
     # - 'main'
     # Notebooks will only come in through /notebooks but it might make

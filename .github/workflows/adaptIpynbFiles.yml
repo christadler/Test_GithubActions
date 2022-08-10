@@ -13,9 +13,9 @@ on:
     # Notebook files could only come in through notebooks* or InputNotebooks*
     #branches:
     #- 'main'
-  paths:
-     - 'notebooks/**/*'
-     - 'InputNotebooks/**/*'
+    paths:
+      - 'notebooks/**/*'
+      - 'InputNotebooks/**/*'
   pull_request:
     branches:
       - 'main'
