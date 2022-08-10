@@ -36,12 +36,12 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
-            if [[ $file == "notebooks/**/*.ipynb" ]]
+            if [[ $file == "*.ipynb" ]]
             then
               # clear output on all .ipynb files for diff'ing 
               echo "$file is an ipynb file"
               jupyter nbconvert --to notebook --ClearOutputPreprocessor.enabled=True $file
-              if [[ $file == "notebooks/**/*solution.ipynb" ]]
+              if [[ $file == "*solution.ipynb" ]]
               then    
                 # execute solutions files inplace
                 echo "$file is an solution file"
