@@ -4,27 +4,20 @@ name: (test) changed_files2ipynb
 
 on:
   push:
-  #branches:
-  #  - 'main'
-    branches:
-      paths:
-        - 'notebooks/**/*'
-  #pull_request:
-  # branches:
-  #   - main
-  #
+    paths:
+      - 'notebooks/**/*'
+        
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build:
+  echoFilenames:
     runs-on: ubuntu-latest 
-
     name: Test changed-files
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+          fetch-depth: 0  
 
       - name: Get specific changed files
         id: changed-files-specific
@@ -41,8 +34,7 @@ jobs:
           do
             echo "old_list: $file was changed"
           done
-
-          for file in ${{ steps.changed-files.outputs.any_changed }};  
-          do
-            echo "new list: $file was changed"
-          done
+          #for file in ${{ steps.changed-files.outputs.any_changed }};  
+          #do
+          # echo "new list: $file was changed"
+          #done
