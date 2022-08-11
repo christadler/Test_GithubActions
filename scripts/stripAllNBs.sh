@@ -7,7 +7,7 @@ do
 	echo "html dir: $html_dir";
 
 	# clear output on all files
-	for nb_file in $(find $nb_dir/*.ipynb);
+	for nb_file in $(find $nb_dir/*.ipynb -maxdepth 1);
 	do
 		echo "nbFile: $nb_file";
 		#jupyter nbconvert --to notebook --ClearOutputPreprocessor.enabled=True --inplace $nb_file;
@@ -22,20 +22,21 @@ do
 	 
 	# make html-pages
 	
-	mkdir -pv $html_dir;
+	#mkdir -pv $html_dir;
 	
 	# copy all none-ipynb-files
-	for other_file in $(find $nb_dir -type f -not -name "*.ipynb");
+	for other_file in $(find $nb_dir -maxdepth 1 -type f -not -name "*.ipynb");
 	do
 		echo "otherFile: $other_file";
 		#cp $other_file $html_dir;
 	done
 
 	# convert all ipynb-files
-	for ipynb_file in $(find $nb_dir/*.ipynb);
+	for ipynb_file in $(find $nb_dir/*.ipynb -maxdepth 1);
 	do
 		echo "ipynb_File: $ipynb_file";
 		#jupyter nbconvert --to html --execute $ipynb_file --ExecutePreprocessor.kernel_name='python3' --output-dir $html_dir;
 	done
 
+	echo "\n\n\n";
 done
