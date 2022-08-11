@@ -1,0 +1,48 @@
+# This file was only used for testing
+# it will not be used for the project
+name: (test) changed_files2ipynb
+
+on:
+  push:
+  #branches:
+  #  - 'main'
+    branches:
+      paths:
+        - 'notebooks/**/*'
+  #pull_request:
+  # branches:
+  #   - main
+  #
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    name: Test changed-files
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+
+      - name: Get specific changed files
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v24.1
+        with: 
+        files: |
+          *.ipynb
+
+      - name: Run step if any of the listed files above changed
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          echo "One or more files listed abve has changed."
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; 
+          do
+            echo "old_list: $file was changed"
+          done
+
+          for file in ${{ steps.changed-files.outputs.any_changed }};  
+          do
+            echo "new list: $file was changed"
+          done
