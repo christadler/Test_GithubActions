@@ -6,11 +6,25 @@ MAINTAINER Iris Christadler <christadler@geophysik.uni-muenchen.de
 #ARG JUPYTERHUB_VERSION=2.3.1
 #RUN pip3 install --no-cache jupyterhub==$JUPYTERHUB_VERSION
 
-RUN conda install --yes 'obspy=1.3.0'
-RUN conda install cartopy --yes
-RUN conda install cartopy_offlinedata --yes
-RUN conda install nbgitpuller --yes
+# add conda-forge channel and move it to top of channel list
+RUN conda install -c conda-forge --yes 'obspy=1.3.0'
+RUN conda install -c conda-forge cartopy --yes
+RUN conda install -c conda-forge cartopy_offlinedata --yes
+RUN conda install -c conda-forge nbgitpuller --yes
 #RUN conda install instaseis --yes
+
+# Install rate and state toolkit
+#RUN pip install https://github.com/jrleeman/rsfmodel/archive/master.zip
+
+# Install the jupyter dashboards.
+RUN pip install jupyter_dashboards && \
+  jupyter dashboards quick-setup --sys-prefix && \
+  jupyter nbextension enable jupyter_dashboards --py --sys-prefix
+
+# Install the code folding plugin.
+RUN conda install --yes -c conda-forge jupyter_contrib_nbextensions && \
+  jupyter contrib nbextension install --user && \
+  jupyter nbextension enable codefolding/main
 
 
 ADD notebooks /home/jovyan/
@@ -26,7 +40,7 @@ RUN mkdir -p ~/.config/matplotlib && touch ~/.config/matplotlib/matplotlibrc && 
 # Build the font cache so its already done in the notebooks.
 RUN python -c "from matplotlib.font_manager import FontManager; FontManager()"
 
-
+#RUN obspy-runtests --no-flake8 -r -n seismo-live-baseimage || true
 
 # Ignore all Pythonwarnings to hide them from the user
 #ENV PYTHONWARNINGS ignore
