@@ -1,0 +1,41 @@
+#!/bin/bash
+
+for nb_dir in $(find ../notebooks/* -type d); 
+do
+	echo "working on: $nb_dir";
+	html_dir=$(echo ${nb_dir} | sed 's/notebooks/html/');
+	echo "html dir: $html_dir";
+
+	# clear output on all files
+	for nb_file in $(find $nb_dir/*.ipynb);
+	do
+		echo "nbFile: $nb_file";
+		#jupyter nbconvert --to notebook --ClearOutputPreprocessor.enabled=True --inplace $nb_file;
+	done
+
+	# execute solution files
+	for sol_file in $(find $nb_dir/*solution.ipynb);
+        do
+                echo "solFile: $sol_file";
+                #jupyter nbconvert --to notebook --execute --inplace $sol_file;
+        done
+	 
+	# make html-pages
+	
+	mkdir -pv $html_dir;
+	
+	# copy all none-ipynb-files
+	for other_file in $(find $nb_dir -type f -not -name "*.ipynb");
+	do
+		echo "otherFile: $other_file";
+		#cp $other_file $html_dir;
+	done
+
+	# convert all ipynb-files
+	for ipynb_file in $(find $nb_dir/*.ipynb);
+	do
+		echo "ipynb_File: $ipynb_file";
+		#jupyter nbconvert --to html --execute $ipynb_file --ExecutePreprocessor.kernel_name='python3' --output-dir $html_dir;
+	done
+
+done
