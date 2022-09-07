@@ -35,4 +35,15 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - id: printName
-        run: echo ${{steps.builddocker.outputs.imageName}} ${{steps.builddocker.outputs.tags}}
+        run: |
+          echo "FROM christadler/test_action:"            > Dockerfile.iris
+          echo ${{steps.builddocker.outputs.tags}}       >> Dockerfile.iris
+
+      - id: Commit
+        uses: EndBug/add-and-commit@v9
+        name: commit updated notebook
+        with:
+          add: 'Dockerfile.iris'
+          message: "Added link to newly created dockerimage" 
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
