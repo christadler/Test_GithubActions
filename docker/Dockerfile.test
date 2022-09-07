@@ -1,0 +1,4 @@
+FROM jupyter/minimal-notebook:57ebe55c07d0
+
+MAINTAINER Iris Christadler <christadler@geophysik.uni-muenchen.de
+
