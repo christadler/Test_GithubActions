@@ -34,13 +34,19 @@ jobs:
 
       - id: printName
         run: |
-          echo "FROM christadler/test_action:"${{steps.builddocker.outputs.tags}} > Dockerfile.iris
+          echo "T4:FROM christadler/test_action:"${{steps.builddocker.outputs.tags}} > Dockerfile.iris
 
-      - id: Commit
-        uses: EndBug/add-and-commit@v9
-        name: commit updated notebook
+      - id: upload
+        uses: actions/upload-artifact@v3
         with:
-          add: 'Dockerfile.iris'
-          message: "Added link to newly created dockerimage" 
-          committer_name: GitHub Actions
-          committer_email: actions@github.com
+          name: Dockerfile
+          path: Dockerfile.iris
+
+            #- id: Commit
+            #uses: EndBug/add-and-commit@v9
+            #name: commit updated notebook
+            #with:
+            #add: 'Dockerfile.iris'
+            #message: "Added link to newly created dockerimage" 
+            #committer_name: GitHub Actions
+            #committer_email: actions@github.com
