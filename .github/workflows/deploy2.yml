@@ -41,7 +41,6 @@ jobs:
         name: commit updated notebook
         with:
           add: 'Dockerfile.iris'
-          pull: '--rebase --autostash'
           message: "Added link to newly created dockerimage" 
           committer_name: GitHub Actions
           committer_email: actions@github.com
