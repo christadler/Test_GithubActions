@@ -30,17 +30,3 @@ jobs:
     needs: job1
     steps: 
       - run: echo ${{needs.job1.outputs.output1}} ${{needs.job1.outputs.output2}}
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        name: Check out code
-
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build & push Docker image
-        with:
-          image: christadler/seismo-live
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
