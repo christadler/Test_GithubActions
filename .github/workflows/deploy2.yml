@@ -35,4 +35,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - id: printName
-        run: echo ${{steps.builddocker.outputs.imageName}}
+        run: echo ${{steps.builddocker.outputs.imageName}} ${{steps.builddocker.outputs.tags}}
